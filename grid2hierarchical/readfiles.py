@@ -83,7 +83,7 @@ def read_gmns_network_from_csv(input_folder):
                 link.link_type_name = row['link_type_name'] if 'link_type_name' in key else ''
                 link.link_type = row['link_type'] if 'link_type' in key else ''
                 link.geometry = loads(row['geometry']) if 'geometry' in key else ''
-                link.allowed_uses = row['allowed_uses'] if 'allowed_uses' in key else ''
+                link.allowed_uses = row['allowed_uses'].split(';') if 'allowed_uses' in key else ''
                 link.from_biway = row['from_biway'] if 'from_biway' in key else ''
                 link.is_link = row['is_link'] if 'is_link' in key else ''
                 try:

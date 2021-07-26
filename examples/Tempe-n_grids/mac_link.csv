@@ -1,4 +1,4 @@
-name,link_id,from_cell_id,to_cell_id,length,lanes,free_speed,capacity,geometry,allowed_uses,number_of_miclink
+name,link_id,from_cell_id,to_cell_id,length,lanes,free_speed,capacity,geometry,allowed_uses,number_of_micro_link
 ,0,4303,4394,224.1179140914726,,,,"LINESTRING (-111.97622672 33.38769721, -111.97622672 33.38962261)",auto,6
 ,1,4394,4303,224.1179140914726,,,,"LINESTRING (-111.97622672 33.38962261, -111.97622672 33.38769721)",auto,6
 ,2,4394,4482,96.77901241189811,,,,"LINESTRING (-111.97622672 33.38962261, -111.97622672 33.39154801)",auto,4

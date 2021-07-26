@@ -47,7 +47,7 @@ def save_network(network, output_folder='csvfile', enconding=None):
         write = csv.writer(outfile)
         write.writerow(['name', 'link_id', 'osm_way_id', 'from_node_id', 'to_node_id','dir_flag','length',
                         'lanes','free_speed','capacity','link_type_name','link_type','geometry','allowed_uses',
-                        'from_biway','is_link','VDF_FFTT1','VDF_cap1','mac_link_id'])
+                        'from_biway','is_link','VDF_FFTT1','VDF_cap1','macro_link_id'])
         for  link in network.mic_link_list:
             line = [link.name, link.link_id, link.osm_way_id, link.from_node_id, link.to_node_id,link.dir_flag,
                     link.length,link.lanes,link.free_speed,link.capacity,link.link_type_name,link.link_type,
@@ -65,7 +65,7 @@ def save_network(network, output_folder='csvfile', enconding=None):
             outfile = open(mac_node_filepath, 'w', newline='', errors='ignore', encoding=enconding)
 
         write = csv.writer(outfile)
-        write.writerow(['name', 'cell_id', 'element', 'num_element','activity_type','ctrl_type', 'node_type',
+        write.writerow(['name', 'cell_id', 'elements', 'number_of_element','activity_type','ctrl_type', 'node_type',
                         'poi_id','x_coord','y_coord','boundary'])
         mac_nodes_sort=sorted(network.mac_node_dict.keys())
         for id in mac_nodes_sort:
@@ -90,7 +90,7 @@ def save_network(network, output_folder='csvfile', enconding=None):
 
         write = csv.writer(outfile)
         write.writerow(['name', 'link_id', 'from_cell_id', 'to_cell_id', 'length','lanes', 'free_speed', 'capacity',
-                        'geometry', 'allowed_uses', 'number_of_miclink'])
+                        'geometry', 'allowed_uses', 'number_of_micro_link'])
         mac_links_sort=sorted(network.mac_link_dict.keys())
         for id in mac_links_sort:
             link=network.mac_link_dict[id]
@@ -98,7 +98,9 @@ def save_network(network, output_folder='csvfile', enconding=None):
             free_speed=sum(link.free_speed_list)/len(link.free_speed_list) if len(link.free_speed_list) else ''
             capacity=sum(link.capacity_list)/len(link.capacity_list) if len(link.capacity_list) else ''
             length=sum(link.length_list)/len(link.length_list) if len(link.length_list) else ''
-            allowed_uses=';'.join(link.allowed_uses) if len(link.allowed_uses)>0 else ''
+            allowed_uses=set(link.allowed_uses)
+            allowed_uses=';'.join(allowed_uses) if len(allowed_uses)>0 else ''
+
             line = [link.name, link.link_id, link.from_cell_id, link.to_cell_id,length, lanes, free_speed,capacity,
                     link.geometry.wkt,allowed_uses,link.number_of_miclink]
             write.writerow(line)

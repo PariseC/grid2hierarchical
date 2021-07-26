@@ -103,17 +103,6 @@ def _simplify_mic_nodes(net):
 
         mic_node_dict = mic_node_dict_
 
-    # delete the empty cells
-    # mac_node_dict=copy.deepcopy(net.mac_node_dict)
-    # net.mac_node_dict={}
-    # cell_id=0
-    # for _,mac_node in mac_node_dict.items():
-    #     if mac_node.num_element>0:
-    #         mac_node.cell_id=cell_id
-    #         for mic_node_id in mac_node.element:
-    #             net.mic_node_dict[mic_node_id].cell_id=cell_id
-    #         net.mac_node_dict[cell_id]=mac_node
-    #         cell_id+=1
     print("%s valid mac_cells were generated"%len(net.mac_node_dict))
 
 def _simplify_mic_links(net):
@@ -147,8 +136,8 @@ def _simplify_mic_links(net):
                 mac_link.free_speed_list.append(mic_link.free_speed)
             if mic_link.capacity:
                 mac_link.capacity_list.append(mic_link.capacity)
-            if mic_link.allowed_uses and mic_link.allowed_uses not in mac_link.allowed_uses:
-                mac_link.allowed_uses.append(mic_link.allowed_uses)
+            if mic_link.allowed_uses:
+                mac_link.allowed_uses.extend(mic_link.allowed_uses)
             mac_link.number_of_miclink+=1
 
             net.mac_link_dict[mac_link.link_id] = mac_link
