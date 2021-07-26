@@ -15,7 +15,10 @@ net=g2h.read_gmns_network_from_csv('./data')
 # set the number of grids to build a macro GMNS network
 g2h.partition_grid(net,n_grids=(100,100))
 # or set the size of grids to build a macro GMNS network
-g2h.partition_grid(net,s_grids=(0.005,0.005))
+# g2h.partition_grid(net,s_grids=(0.005,0.005))
+
+"""Step 3: Save network files"""
+g2h.save_network(net,output_folder='./macro_network_by_n_grids')
 ```
 ## Sample Networks
 
