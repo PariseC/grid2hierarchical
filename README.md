@@ -6,19 +6,19 @@
 ## Simple Example
 >The recommended way to install use the package is colning the source code from [github](https://github.com/PariseC/grid2hierarchical).
 ```python
->>>import grid2hierarchical as g2h
+>>>import net2grid as ng
 
 """Step 1: Read GMNS network"""
-net=g2h.read_gmns_network_from_csv('./data')
+net=ng.read_gmns_network_from_csv('./data')
 
 """Step 2: Build macro GMNS network"""
 # set the number of grids to build a macro GMNS network
-g2h.partition_grid(net,n_grids=(100,100))
+ng.partition_grid(net,n_grids=(100,100))
 # or set the size of grids to build a macro GMNS network
-# g2h.partition_grid(net,s_grids=(0.005,0.005))
+# ng.partition_grid(net,s_grids=(0.005,0.005))
 
 """Step 3: Save network files"""
-g2h.save_network(net,output_folder='./macro_network_by_n_grids')
+ng.save_network(net,output_folder='./macro_network_by_n_grids')
 ```
 ## Sample Networks
 
