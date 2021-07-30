@@ -1,4 +1,4 @@
-# Grid2Hierarchical: An open-source academic research tool for building macro GMNS networks from micro GMNS networks for transportation system modeling and optimization
+# net2grid: An open-source academic research tool for building macro GMNS networks from micro GMNS networks for transportation system modeling and optimization
 
 ## Requirements
 - shapely
