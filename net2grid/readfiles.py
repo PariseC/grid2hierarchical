@@ -21,7 +21,7 @@ def read_gmns_network_from_csv(input_folder):
             y_coord_list=[]
             for row in islice(node_reader, 0, None):
                 key=row.keys()
-                node=MicNode()
+                node=Node()
                 node.node_id = int(row['node_id']) if 'node_id' in key else None
                 node.name = row['name'] if 'name' in key else ''
                 node.osm_node_id = row['osm_node_id'] if 'osm_node_id' in key else ''
@@ -39,7 +39,7 @@ def read_gmns_network_from_csv(input_folder):
                 if node.x_coord and node.y_coord:
                     node.geometry=Point(node.x_coord,node.y_coord)
                     if node.node_id is not None:
-                        network.mic_node_dict[node.node_id]=node
+                        network.node_dict[node.node_id]=node
                         x_coord_list.append(node.x_coord)
                         y_coord_list.append(node.y_coord)
             network.min_x_coord=min(x_coord_list)-(abs(min(x_coord_list))*Coordinate_Extend_Scale)
@@ -57,7 +57,7 @@ def read_gmns_network_from_csv(input_folder):
             link_reader = csv.DictReader(f)
             for row in islice(link_reader, 0, None):
                 key=row.keys()
-                link=MicLink()
+                link=Link()
                 link.name =row['name'] if 'name' in key else ''
                 link.link_id = row['link_id'] if 'link_id' in key else ''
                 link.osm_way_id = row['osm_way_id'] if 'osm_way_id' in key else ''
@@ -95,7 +95,7 @@ def read_gmns_network_from_csv(input_folder):
                 except:
                     link.VDF_cap1=''
                 if link.from_node_id is not None and link.to_node_id is not None:
-                    network.mic_link_list.append(link)
+                    network.link_list.append(link)
                 else:
                     print("warning: link id=%s is ignored" % link.link_id)
 
@@ -103,6 +103,6 @@ def read_gmns_network_from_csv(input_folder):
         print(e)
         print(row)
         sys.exit(0)
-    print("%s mic_nodes were read"%len(network.mic_node_dict))
-    print("%s mic_links were read"%len(network.mic_link_list))
+    print("%s nodes were read"%len(network.node_dict))
+    print("%s links were read"%len(network.link_list))
     return network

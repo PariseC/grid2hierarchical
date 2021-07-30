@@ -1,5 +1,5 @@
 
-class MicNode():
+class Node():
     def __init__(self):
         self.node_id=None
         self.name=None
@@ -18,7 +18,7 @@ class MicNode():
         self.geometry=None
         self.cell_id=0
 
-class MicLink():
+class Link():
     def __init__(self):
         self.name=None
         self.link_id=None
@@ -38,44 +38,47 @@ class MicLink():
         self.is_link=None
         self.VDF_FFTT1=None
         self.VDF_cap1=None
-        self.mac_link_id=0
+        self.grid_link_id=''
 
-class MacNode():
+class GridNode():
     def __init__(self):
-        self.name=''
+        self.node_id=0
         self.cell_id=0
-        self.element=[]
-        self.num_element=0
+        self.elements=[]
+        self.number_of_elements=0
         self.activity_type=[]
         self.ctrl_type=[]
         self.node_type=[]
         self.poi_id=[]
+        self.modes=[]
         self.geometry=None
         self.x_coord=None
         self.y_coord=None
-        self.boundary=None
 
-class MacLink():
+class GridLink():
     def __init__(self):
-        self.name=''
         self.link_id=0
+        self.from_node_id = 0
+        self.to_node_id = 0
         self.from_cell_id=0
         self.to_cell_id=0
+        self.link_type_name=''
+        self.link_type=''
         self.length_list=[]
         self.lanes_list=[]
         self.free_speed_list=[]
         self.capacity_list=[]
         self.geometry=None
         self.allowed_uses=[]
-        self.number_of_miclink=0
+        self.number_of_links=0
 
 class Network():
     def __init__(self):
-        self.mic_node_dict={}
-        self.mic_link_list=[]
+        self.node_dict={}
+        self.link_list=[]
 
-        self.mac_node_dict={}
-        self.mac_link_dict={}
+        self.grid_node_dict={}
+        self.grid_link_dict={}
 
         self.min_x_coord=-180
         self.min_y_coord=-90
